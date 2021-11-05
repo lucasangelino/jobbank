@@ -1,10 +1,8 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import {
   Box,
-  VStack,
   Heading,
   Text,
-  SimpleGrid as Grid,
   Checkbox,
   Stack,
   Container,
@@ -16,7 +14,6 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Select } from "@chakra-ui/select";
 import { Link } from "react-router-dom";
 
@@ -92,6 +89,7 @@ const RegisterForm = () => {
   const [isCompany, setIsCompany] = useState(false);
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+
   return (
     <Stack
       bg={"gray.50"}
@@ -142,7 +140,7 @@ const RegisterForm = () => {
             <option value="option2">English</option>
           </Select>
           <Select placeholder="Categoria">
-            <option value="option1">Petroleras</option>
+            <option value="option1">Petrolera</option>
             <option value="option2">Bancos</option>
           </Select>
           <InputGroup size="md">

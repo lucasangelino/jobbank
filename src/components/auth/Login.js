@@ -1,10 +1,12 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import {
   Box,
-  Flex,
-  Stack,
+  VStack,
   Heading,
   Text,
+  SimpleGrid as Grid,
+  GridItem,
+  Stack,
   Container,
   Input,
   Button,
@@ -12,10 +14,11 @@ import {
   Icon,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import { Select } from "@chakra-ui/select";
+import { Link } from "react-router-dom";
 
 function Login() {
-  const handleClick = useCallback((e) => {}, []);
-
   return (
     <Box position={"relative"}>
       <Container
@@ -43,99 +46,13 @@ function Login() {
             </Text>
           </Heading>
           <Stack direction={"row"} spacing={4} align={"center"}>
-            <Text fontFamily={"heading"} fontSize={{ base: "4xl", md: "6xl" }}>
-              +
-            </Text>
-            <Flex
-              align={"center"}
-              justify={"center"}
+            <Text
               fontFamily={"heading"}
-              fontSize={{ base: "sm", md: "lg" }}
-              bg={"gray.800"}
-              color={"white"}
-              rounded={"full"}
-              width={useBreakpointValue({ base: "44px", md: "60px" })}
-              height={useBreakpointValue({ base: "44px", md: "60px" })}
-              position={"relative"}
-              _before={{
-                content: '""',
-                width: "full",
-                height: "full",
-                rounded: "full",
-                transform: "scale(1.125)",
-                bgGradient: "linear(to-bl, orange.400,yellow.400)",
-                position: "absolute",
-                zIndex: -1,
-                top: 0,
-                left: 0,
-              }}
-            >
-              YOU
-            </Flex>
+              fontSize={{ base: "4xl", md: "6xl" }}
+            ></Text>
           </Stack>
         </Stack>
-        <Stack
-          bg={"gray.50"}
-          rounded={"xl"}
-          p={{ base: 4, sm: 6, md: 8 }}
-          spacing={{ base: 8 }}
-          maxW={{ lg: "lg" }}
-        >
-          <Stack spacing={4}>
-            <Heading
-              color={"gray.800"}
-              lineHeight={1.1}
-              fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
-            >
-              Inicia sesión
-            </Heading>
-            <Text color={"gray.500"} fontSize={{ base: "sm", sm: "md" }}></Text>
-          </Stack>
-          <Box as={"form"} mt={10}>
-            <Stack spacing={4}>
-              <Input
-                placeholder="Grupo 9"
-                bg={"gray.100"}
-                border={0}
-                color={"gray.500"}
-                _placeholder={{
-                  color: "gray.500",
-                }}
-              />
-              <Input
-                placeholder="Contraseña"
-                bg={"gray.100"}
-                border={0}
-                color={"gray.500"}
-                _placeholder={{
-                  color: "gray.500",
-                }}
-              />
-            </Stack>
-            <Button
-              fontFamily={"heading"}
-              mt={8}
-              w={"full"}
-              bgGradient="linear(to-r, red.400,pink.400)"
-              color={"white"}
-              _hover={{
-                bgGradient: "linear(to-r, red.400,pink.400)",
-                boxShadow: "xl",
-              }}
-              onClick={handleClick}
-            >
-              Login
-            </Button>
-            <Button
-              type={"link"}
-              fontFamily={"heading"}
-              w={"full"}
-              color={"#000"}
-            >
-              o Regístrate
-            </Button>
-          </Box>
-        </Stack>
+        <LoginForm />
       </Container>
       <Blur
         position={"absolute"}
@@ -169,5 +86,69 @@ export const Blur = (props) => {
   );
 };
 
-Login.layout = "authLayout";
+const LoginForm = () => {
+  return (
+    <Stack
+      bg={"gray.50"}
+      rounded={"xl"}
+      p={{ base: 4, sm: 6, md: 8 }}
+      spacing={{ base: 8 }}
+      maxW={{ lg: "lg" }}
+    >
+      <Stack spacing={4}>
+        <Heading
+          color={"gray.800"}
+          lineHeight={1.1}
+          fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
+        >
+          Inicia sesión
+        </Heading>
+        <Text color={"gray.500"} fontSize={{ base: "sm", sm: "md" }}></Text>
+      </Stack>
+      <Box as={"form"} mt={10}>
+        <Stack spacing={4}>
+          <Input
+            placeholder="Grupo 9"
+            bg={"gray.100"}
+            border={0}
+            color={"gray.500"}
+            _placeholder={{
+              color: "gray.500",
+            }}
+          />
+          <Input
+            placeholder="Contraseña"
+            bg={"gray.100"}
+            border={0}
+            color={"gray.500"}
+            _placeholder={{
+              color: "gray.500",
+            }}
+          />
+        </Stack>
+        <Button
+          fontFamily={"heading"}
+          mt={8}
+          mb={1}
+          w={"full"}
+          bgGradient="linear(to-r, red.400,pink.400)"
+          color={"white"}
+          _hover={{
+            bgGradient: "linear(to-r, red.400,pink.400)",
+            boxShadow: "xl",
+          }}
+        >
+          Login
+        </Button>
+        <Button
+          // onClick={setToogleLogin(!toogleLogin)}
+          variant="link"
+          colorScheme="black"
+        >
+          o Registrate
+        </Button>
+      </Box>
+    </Stack>
+  );
+};
 export default Login;

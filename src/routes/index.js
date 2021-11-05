@@ -24,15 +24,9 @@ const routes = [
     browserTitle: "Mis Postulaciones",
   },
   {
-    path: "/login",
+    path: "/auth",
     exact: true,
     main: () => <Login />,
-    browserTitle: "Mis Postulaciones",
-  },
-  {
-    path: "/register",
-    exact: true,
-    main: () => <Register />,
     browserTitle: "Mis Postulaciones",
   },
 ];

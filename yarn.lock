@@ -9952,7 +9952,7 @@ react-router-dom@^6.0.0:
   dependencies:
     react-router "6.0.0"
 
-react-router@6.0.0:
+react-router@6.0.0, react-router@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.0.0.tgz#a8803ac7b612c2a2d31cc466ceda656cf31fdfb9"
   integrity sha512-FcTRCihYZvERMNbG54D9+Wkv2cj/OtoxNlA/87D7vxKYlmSmbF9J9XChI9Is44j/behEiOhbovgVZBhKQn+wgA==

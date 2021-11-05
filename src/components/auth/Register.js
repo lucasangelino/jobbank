@@ -5,7 +5,7 @@ import {
   Heading,
   Text,
   SimpleGrid as Grid,
-  GridItem,
+  Checkbox,
   Stack,
   Container,
   Input,
@@ -89,6 +89,7 @@ export const Blur = (props) => {
 };
 
 const RegisterForm = () => {
+  const [isCompany, setIsCompany] = useState(false);
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   return (
@@ -120,15 +121,17 @@ const RegisterForm = () => {
               color: "gray.500",
             }}
           />
-          <Input
-            placeholder="Apellido"
-            bg={"gray.100"}
-            border={0}
-            color={"gray.500"}
-            _placeholder={{
-              color: "gray.500",
-            }}
-          />
+          {!isCompany && (
+            <Input
+              placeholder="Apellido"
+              bg={"gray.100"}
+              border={0}
+              color={"gray.500"}
+              _placeholder={{
+                color: "gray.500",
+              }}
+            />
+          )}
           <Select placeholder="Nacionalidades">
             <option value="option1">Argentina</option>
             <option value="option2">Brasil</option>
@@ -169,6 +172,9 @@ const RegisterForm = () => {
         >
           Login
         </Button>
+        <Checkbox mr={10} onChange={(e) => setIsCompany(!isCompany)}>
+          Soy una empresa
+        </Checkbox>
         <Link to="/login">Ya tieneas cuenta?</Link>
       </Box>
     </Stack>

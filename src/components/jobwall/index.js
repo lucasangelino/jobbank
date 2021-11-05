@@ -1,10 +1,16 @@
-import { Grid, Container, GridItem } from "@chakra-ui/react";
+import {
+  Grid,
+  Container,
+  GridItem,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 // Components
 import JobCard from "../jobcard/";
 import UserInfo from "../userInfo/";
 
 export default function JobOffers() {
+  const isMobile = useBreakpointValue({ base: false, md: true });
   return (
     <Container maxW="container.xl" py={5}>
       <Grid
@@ -13,12 +19,14 @@ export default function JobOffers() {
         templateColumns="repeat(5, 1fr)"
         gap={4}
       >
-        <GridItem rowSpan={2} colSpan={1} borderRadius={4}>
-          <UserInfo />
-        </GridItem>
+        {isMobile && (
+          <GridItem rowSpan={2} colSpan={1} borderRadius={4}>
+            <UserInfo />
+          </GridItem>
+        )}
 
-        <GridItem colSpan={4} borderRadius={4}>
-          <Container maxW="container.xl" centerContent px={20}>
+        <GridItem colSpan={4} borderRadius={4} px={10}>
+          <Container maxW="container.xl" centerContent>
             {[1, 2, 3, 4, 5, 6, 7, 8].map((job, index) => (
               <JobCard key={index} />
             ))}

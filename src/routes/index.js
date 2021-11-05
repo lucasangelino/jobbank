@@ -1,14 +1,12 @@
 import * as React from "react";
 
 // Components
-import Login from "../components/auth/Login";
-import Register from "../components/auth/Register";
-
+import JobOffers from "../components/jobwall";
 const routes = [
   {
     path: "/",
     exact: true,
-    main: () => <h2>JobBank</h2>,
+    main: () => <JobOffers />,
     browserTitle: "JobBank",
   },
   {
@@ -21,12 +19,6 @@ const routes = [
     path: "/postulaciones",
     exact: true,
     main: () => <h2>Postulaciones</h2>,
-    browserTitle: "Mis Postulaciones",
-  },
-  {
-    path: "/auth",
-    exact: true,
-    main: () => <Login />,
     browserTitle: "Mis Postulaciones",
   },
 ];

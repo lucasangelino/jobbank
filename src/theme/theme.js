@@ -68,7 +68,7 @@ const theme = extendTheme(
       },
       Divider: {
         baseStyle: {
-          borderColor: "brand.800",
+          borderColor: "brand.100",
         },
       },
       Input: {

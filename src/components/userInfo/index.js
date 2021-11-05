@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Avatar, Text, HStack } from "@chakra-ui/react";
 import { VStack, Divider } from "@chakra-ui/layout";
 
 export default function UserInfo() {
@@ -17,12 +17,35 @@ export default function UserInfo() {
         h="full"
         p={2}
         alignContent="space-between"
-        divider={<Divider borderColor="brand.800" />}
+        divider={<Divider borderColor="gray.100" />}
       >
-        <div>
-          <h3>Lucas Angelino</h3>
-          <h5>Software Developer</h5>
-        </div>
+        <Avatar
+          size={"lg"}
+          src={"https://randomuser.me/api/portraits/thumb/men/75.jpg"}
+        />
+        <Flex flexDirection={"column"} alignItems="center">
+          <Text fontSize={20} fontWeight={"bold"}>
+            Lucas Angelino
+          </Text>
+          <Text fontSize={15}>Software Developer</Text>
+        </Flex>
+        <HStack justifyContent="space-between" w="full">
+          <Text fontSize={"xs"} color="gray.500">
+            Quien ha visto tu perfil?
+          </Text>
+          <Text fontSize={"xs"} color="brand.800">
+            90
+          </Text>
+        </HStack>
+
+        <HStack justifyContent="space-between" w="full">
+          <Text fontSize={"xs"} color="gray.500">
+            Amplia tu red de contactos
+          </Text>
+          <Text fontSize={"xs"} color="brand.800">
+            500+
+          </Text>
+        </HStack>
       </VStack>
     </Box>
   );

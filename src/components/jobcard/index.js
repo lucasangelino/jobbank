@@ -9,7 +9,7 @@ import {
   Flex,
 } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
-import { EditIcon } from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 export default function JobCard() {
   return (
@@ -27,7 +27,7 @@ export default function JobCard() {
         h="full"
         p={2}
         alignContent="space-between"
-        divider={<Divider borderColor="brand.800" />}
+        divider={<Divider borderColor="gray.300" />}
       >
         <EmployerDescription />
         <JobDescription />
@@ -47,7 +47,7 @@ const EmployerDescription = () => {
           <JobPostedTime />
         </Box>
       </Flex>
-      <EditIcon w={4} h={4} />
+      <HamburgerIcon w={4} h={4} />
     </Stack>
   );
 };
@@ -120,7 +120,7 @@ const JobRequirements = () => {
 const ActionButtons = () => {
   return (
     <Stack mt={2} w="full" direction="row" justifyContent="flex-end">
-      <Button colorScheme="blue" size="md">
+      <Button colorScheme="blue" size="md" variant="outline">
         Postularse
       </Button>
     </Stack>

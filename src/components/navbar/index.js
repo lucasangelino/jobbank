@@ -46,63 +46,70 @@ export default function Navbar() {
 
   return (
     <>
-      <Container maxW="container.xl">
-        <Box px={4}>
-          <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-            <IconButton
-              size={"md"}
-              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-              aria-label={"Open Menu"}
-              display={{ md: "none" }}
-              onClick={isOpen ? onClose : onOpen}
-            />
-            <HStack spacing={8} alignItems={"center"}>
-              <HStack
-                as={"nav"}
-                spacing={4}
-                display={{ base: "none", md: "flex" }}
-              >
-                {Links.map((link) => (
-                  <NavLink key={link}>{link}</NavLink>
-                ))}
-              </HStack>
-            </HStack>
-            <Flex alignItems={"center"}>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={"full"}
-                  variant={"link"}
-                  cursor={"pointer"}
-                  minW={0}
-                  mr={4}
+      <Box>
+        <Container maxW="full" bg={"white"}>
+          <Box px={4}>
+            <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+              <IconButton
+                size={"md"}
+                icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+                aria-label={"Open Menu"}
+                display={{ md: "none" }}
+                onClick={isOpen ? onClose : onOpen}
+              />
+              <HStack spacing={8} alignItems={"center"}>
+                <HStack
+                  as={"nav"}
+                  spacing={4}
+                  display={{ base: "none", md: "flex" }}
                 >
-                  <Avatar size={"sm"} src={""} />
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Ver perfil</MenuItem>
-                  <MenuItem>Ver postulaciones</MenuItem>
-                  <MenuDivider />
-                  <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
-                </MenuList>
-              </Menu>
-              <Button onClick={toggleColorMode}>
-                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-              </Button>
+                  {Links.map((link) => (
+                    <NavLink key={link}>{link}</NavLink>
+                  ))}
+                </HStack>
+              </HStack>
+              <Flex alignItems={"center"}>
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                    mr={4}
+                  >
+                    <Avatar
+                      size={"sm"}
+                      src={
+                        "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                      }
+                    />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem>Ver perfil</MenuItem>
+                    <MenuItem>Ver postulaciones</MenuItem>
+                    <MenuDivider />
+                    <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
+                  </MenuList>
+                </Menu>
+                <Button onClick={toggleColorMode}>
+                  {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                </Button>
+              </Flex>
             </Flex>
-          </Flex>
 
-          {isOpen ? (
-            <Box pb={4} display={{ md: "none" }}>
-              <Stack as={"nav"} spacing={4}>
-                {Links.map((link) => (
-                  <NavLink key={link}>{link}</NavLink>
-                ))}
-              </Stack>
-            </Box>
-          ) : null}
-        </Box>
-      </Container>
+            {isOpen ? (
+              <Box pb={4} display={{ md: "none" }}>
+                <Stack as={"nav"} spacing={4}>
+                  {Links.map((link) => (
+                    <NavLink key={link}>{link}</NavLink>
+                  ))}
+                </Stack>
+              </Box>
+            ) : null}
+          </Box>
+        </Container>
+      </Box>
     </>
   );
 }

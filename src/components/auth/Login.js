@@ -1,11 +1,8 @@
 import { useCallback, useState } from "react";
 import {
   Box,
-  VStack,
   Heading,
   Text,
-  SimpleGrid as Grid,
-  GridItem,
   Stack,
   Container,
   Input,
@@ -14,8 +11,6 @@ import {
   Icon,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { Select } from "@chakra-ui/select";
 import { Link } from "react-router-dom";
 
 function Login() {
@@ -87,6 +82,22 @@ export const Blur = (props) => {
 };
 
 const LoginForm = () => {
+  const [login, setLogin] = useState({
+    user: "",
+    password: "",
+  });
+
+  const handleInputchange = (e) => {
+    setLogin({
+      ...login,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleLoginClick = () => {
+    console.log(login);
+  };
+
   return (
     <Stack
       bg={"gray.50"}
@@ -108,6 +119,7 @@ const LoginForm = () => {
       <Box as={"form"} mt={10}>
         <Stack spacing={4}>
           <Input
+            name="user"
             placeholder="Grupo 9"
             bg={"gray.100"}
             border={0}
@@ -115,8 +127,10 @@ const LoginForm = () => {
             _placeholder={{
               color: "gray.500",
             }}
+            onChange={handleInputchange}
           />
           <Input
+            name="password"
             placeholder="Contraseña"
             bg={"gray.100"}
             border={0}
@@ -124,12 +138,13 @@ const LoginForm = () => {
             _placeholder={{
               color: "gray.500",
             }}
+            onChange={handleInputchange}
           />
         </Stack>
         <Button
           fontFamily={"heading"}
           mt={8}
-          mb={1}
+          mb={4}
           w={"full"}
           bgGradient="linear(to-r, red.400,pink.400)"
           color={"white"}
@@ -137,16 +152,11 @@ const LoginForm = () => {
             bgGradient: "linear(to-r, red.400,pink.400)",
             boxShadow: "xl",
           }}
+          onClick={handleLoginClick}
         >
           Login
         </Button>
-        <Button
-          // onClick={setToogleLogin(!toogleLogin)}
-          variant="link"
-          colorScheme="black"
-        >
-          o Registrate
-        </Button>
+        <Link to="/register">o Registrate</Link>
       </Box>
     </Stack>
   );

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Heading,
@@ -10,6 +10,8 @@ import {
   SimpleGrid,
   Icon,
   useBreakpointValue,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -82,6 +84,7 @@ export const Blur = (props) => {
 };
 
 const LoginForm = () => {
+  const [show, setShow] = useState(false);
   const [login, setLogin] = useState({
     user: "",
     password: "",
@@ -97,6 +100,8 @@ const LoginForm = () => {
   const handleLoginClick = () => {
     console.log(login);
   };
+
+  const handleClick = () => setShow(!show);
 
   return (
     <Stack
@@ -129,17 +134,20 @@ const LoginForm = () => {
             }}
             onChange={handleInputchange}
           />
-          <Input
-            name="password"
-            placeholder="Contraseña"
-            bg={"gray.100"}
-            border={0}
-            color={"gray.500"}
-            _placeholder={{
-              color: "gray.500",
-            }}
-            onChange={handleInputchange}
-          />
+          <InputGroup size="md">
+            <Input
+              name="password"
+              pr="4.5rem"
+              type={show ? "text" : "password"}
+              placeholder="Contraseña"
+              onChange={handleInputchange}
+            />
+            <InputRightElement width="4.5rem">
+              <Button h="1.75rem" size="sm" onClick={handleClick}>
+                {show ? "Hide" : "Show"}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
         </Stack>
         <Button
           fontFamily={"heading"}

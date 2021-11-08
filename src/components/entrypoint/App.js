@@ -2,9 +2,10 @@ import "../../App.css";
 import AuthenticatedApp from "../entrypoint/AuthenticatedApp";
 import UnAuthenticatedApp from "../entrypoint/UnAuthenticatedApp";
 
-function App() {
-  const isUserAuth = false;
-  return isUserAuth ? <AuthenticatedApp /> : <UnAuthenticatedApp />;
-}
+// Hooks
+import { useUser } from "../../hooks/useUser";
 
-export default App;
+export default function App() {
+  const user = useUser();
+  return user ? <AuthenticatedApp /> : <UnAuthenticatedApp />;
+}

@@ -9,6 +9,7 @@ export function useUser() {
   };
 
   const logout = () => {
+    console.log("logout");
     localStorage.clear();
     setUser(false);
   };

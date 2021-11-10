@@ -18,6 +18,7 @@ import {
   Container,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { useUser } from "../../hooks/useUser";
 
 const Links = ["Home", "Postulaciones", "Empresa"];
 
@@ -37,11 +38,13 @@ const NavLink = ({ children }) => (
 );
 
 export default function Navbar() {
+  const { logout } = useUser();
+
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleLogout = () => {
-    console.log("logout");
+    logout();
   };
 
   return (

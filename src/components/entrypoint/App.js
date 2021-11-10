@@ -6,6 +6,8 @@ import UnAuthenticatedApp from "../entrypoint/UnAuthenticatedApp";
 import { useUser } from "../../hooks/useUser";
 
 export default function App() {
-  const user = useUser();
-  return user.user ? <AuthenticatedApp /> : <UnAuthenticatedApp />;
+  const { user } = useUser();
+  console.log("app");
+  console.log(user);
+  return user ? <AuthenticatedApp /> : <UnAuthenticatedApp />;
 }

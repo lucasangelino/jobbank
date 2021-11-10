@@ -100,15 +100,15 @@ const LoginForm = () => {
   };
 
   const handleLoginClick = async () => {
-    const res = await fetch("http://localhost:8080/public/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    const token = await res.json();
-    login(token);
+    // const res = await fetch("http://localhost:8080/public/users/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(user),
+    // });
+    // const token = await res.json();
+    login(1234);
   };
 
   const handleClick = () => setShow(!show);

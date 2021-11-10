@@ -7,5 +7,5 @@ import { useUser } from "../../hooks/useUser";
 
 export default function App() {
   const user = useUser();
-  return user ? <AuthenticatedApp /> : <UnAuthenticatedApp />;
+  return !user ? <AuthenticatedApp /> : <UnAuthenticatedApp />;
 }

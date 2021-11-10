@@ -14,6 +14,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 function Login() {
   return (
@@ -84,21 +85,30 @@ export const Blur = (props) => {
 };
 
 const LoginForm = () => {
+  const { login } = useUser();
   const [show, setShow] = useState(false);
-  const [login, setLogin] = useState({
-    user: "",
+  const [user, setUser] = useState({
+    name: "",
     password: "",
   });
 
   const handleInputchange = (e) => {
-    setLogin({
-      ...login,
+    setUser({
+      ...user,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleLoginClick = () => {
-    console.log(login);
+  const handleLoginClick = async () => {
+    const res = await fetch("http://localhost:8080/public/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    const token = await res.json();
+    login(token);
   };
 
   const handleClick = () => setShow(!show);
@@ -124,7 +134,7 @@ const LoginForm = () => {
       <Box as={"form"} mt={10}>
         <Stack spacing={4}>
           <Input
-            name="user"
+            name="name"
             placeholder="Grupo 9"
             bg={"gray.100"}
             border={0}

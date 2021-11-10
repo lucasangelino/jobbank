@@ -10,20 +10,21 @@ import routes from "../../routes/";
 export default function AuthenticatedApp() {
   return (
     <div>
-      <Layout />
-      <Routes>
-        {routes.map((route, index) => {
-          const { path, main, exact, title } = route;
-          return (
-            <Route
-              key={index}
-              path={path}
-              exact={exact}
-              element={<View component={main} title={title} />}
-            />
-          );
-        })}
-      </Routes>
+      <Layout>
+        <Routes>
+          {routes.map((route, index) => {
+            const { path, main, exact, title } = route;
+            return (
+              <Route
+                key={index}
+                path={path}
+                exact={exact}
+                element={<View component={main} title={title} />}
+              />
+            );
+          })}
+        </Routes>
+      </Layout>
     </div>
   );
 }

@@ -21,12 +21,10 @@ import { VStack, Divider } from "@chakra-ui/layout";
 import { useUser } from "../../hooks/useUser";
 
 export default function UserInfo() {
-  const [intereses, setIntereses] = React.useState({
-    interes1: "",
-  });
+  const [intereses, setIntereses] = React.useState([]);
+  const [newInteres, setNewInteres] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { is_empresa, user_name } = useUser();
-  console.log(is_empresa, user_name, intereses);
 
   const addInteres = async () => {
     const token = localStorage.getItem("token");
@@ -42,15 +40,18 @@ export default function UserInfo() {
       }
     );
     const parsedResponse = await response.json();
-    console.log(parsedResponse);
   };
 
   const handleChange = (e) => {
-    setIntereses({ ...intereses, [e.target.name]: e.target.value });
+    setNewInteres({
+      ...newInteres,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleAgregar = () => {
-    addInteres();
+    console.log(newInteres);
+    setIntereses([...intereses, Object.values(newInteres)]);
     onClose();
   };
 
@@ -109,6 +110,13 @@ export default function UserInfo() {
             </HStack>
           )}
         </VStack>
+        <HStack justifyContent="space-between" w="full">
+          {intereses.map((interes) => (
+            <Text fontSize={"xs"} color="gray.500">
+              {interes}
+            </Text>
+          ))}
+        </HStack>
       </Box>
       <Modal
         isCentered

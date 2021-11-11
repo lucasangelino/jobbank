@@ -13,7 +13,7 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 
 function Login() {
@@ -85,6 +85,8 @@ export const Blur = (props) => {
 };
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
   const { login } = useUser();
   const [show, setShow] = useState(false);
   const [user, setUser] = useState({
@@ -109,6 +111,7 @@ const LoginForm = () => {
     // });
     // const token = await res.json();
     login(1234);
+    navigate("/");
   };
 
   const handleClick = () => setShow(!show);

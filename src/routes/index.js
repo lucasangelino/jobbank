@@ -4,6 +4,7 @@ import * as React from "react";
 import JobOffers from "../components/jobwall";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
+import Profile from "../components/profile";
 
 const routes = [
   {
@@ -28,6 +29,12 @@ const routes = [
     path: "/publicaciones",
     exact: true,
     main: () => <h2>Mis Publicaciones</h2>,
+    browserTitle: "Mis Publicaciones",
+  },
+  {
+    path: "/profile",
+    exact: true,
+    main: () => <Profile />,
     browserTitle: "Mis Publicaciones",
   },
 ];

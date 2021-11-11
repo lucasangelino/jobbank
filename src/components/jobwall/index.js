@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Grid,
   Container,
@@ -11,7 +12,18 @@ import Navbar from "../navbar";
 import UserInfo from "../userInfo/";
 
 export default function JobOffers() {
+  const [publicaciones, setPublicaciones] = React.useState([]);
   const isMobile = useBreakpointValue({ base: false, md: true });
+
+  React.useEffect(() => {
+    async function getPublicaciones() {
+      const res = await fetch("http://localhost:8080/publicacion/all");
+      const data = await res.json();
+      setPublicaciones(data);
+    }
+    getPublicaciones();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -30,7 +42,7 @@ export default function JobOffers() {
 
           <GridItem colSpan={4} borderRadius={4} px={10}>
             <Container maxW="container.xl" centerContent>
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((job, index) => (
+              {publicaciones.map((job, index) => (
                 <JobCard key={index} />
               ))}
             </Container>

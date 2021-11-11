@@ -4,6 +4,7 @@ export function useUser() {
   const [user, setUser] = useState(() => localStorage.getItem("token"));
 
   const login = (token) => {
+    console.log("login");
     localStorage.setItem("token", token);
     setUser(true);
   };

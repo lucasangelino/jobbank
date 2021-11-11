@@ -3,7 +3,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  Link,
   IconButton,
   Button,
   Menu,
@@ -12,33 +11,18 @@ import {
   MenuItem,
   MenuDivider,
   useDisclosure,
-  useColorModeValue,
   Stack,
   useColorMode,
   Container,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 
 const Links = ["Home", "Postulaciones", "Empresa"];
 
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
-);
-
 export default function Navbar() {
-  const { logout } = useUser();
+  const { logout, is_company } = useUser();
 
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -66,9 +50,20 @@ export default function Navbar() {
                   spacing={4}
                   display={{ base: "none", md: "flex" }}
                 >
-                  {Links.map((link) => (
-                    <NavLink key={link}>{link}</NavLink>
-                  ))}
+                  <Link key={1} to={"/"}>
+                    {"Home"}
+                  </Link>
+                  <Link key={2} to={"/"}>
+                    {"Postulaciones"}
+                  </Link>
+                  <Link key={3} to={"/perfil"}>
+                    {"Perfil"}
+                  </Link>
+                  {is_company && (
+                    <Link key={3} to={"/perfil"}>
+                      {"Nueva Publicacion"}
+                    </Link>
+                  )}
                 </HStack>
               </HStack>
               <Flex alignItems={"center"}>
@@ -100,16 +95,6 @@ export default function Navbar() {
                 </Button>
               </Flex>
             </Flex>
-
-            {isOpen ? (
-              <Box pb={4} display={{ md: "none" }}>
-                <Stack as={"nav"} spacing={4}>
-                  {Links.map((link) => (
-                    <NavLink key={link}>{link}</NavLink>
-                  ))}
-                </Stack>
-              </Box>
-            ) : null}
           </Box>
         </Container>
       </Box>

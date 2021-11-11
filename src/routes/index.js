@@ -2,7 +2,22 @@ import * as React from "react";
 
 // Components
 import JobOffers from "../components/jobwall";
+import Login from "../components/auth/Login";
+import Register from "../components/auth/Register";
+
 const routes = [
+  {
+    path: "/login",
+    exact: true,
+    main: () => <Login />,
+    browserTitle: "JobBank",
+  },
+  {
+    path: "/register",
+    exact: true,
+    main: () => <Register />,
+    browserTitle: "JobBank",
+  },
   {
     path: "/",
     exact: true,
@@ -14,12 +29,6 @@ const routes = [
     exact: true,
     main: () => <h2>Mis Publicaciones</h2>,
     browserTitle: "Mis Publicaciones",
-  },
-  {
-    path: "/postulaciones",
-    exact: true,
-    main: () => <h2>Postulaciones</h2>,
-    browserTitle: "Mis Postulaciones",
   },
 ];
 

@@ -18,12 +18,15 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 import { VStack, Divider } from "@chakra-ui/layout";
+import { useUser } from "../../hooks/useUser";
 
 export default function UserInfo() {
   const [intereses, setIntereses] = React.useState({
     interes1: "",
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { is_empresa, user_name } = useUser();
+  console.log(is_empresa, user_name, intereses);
 
   const addInteres = async () => {
     const token = localStorage.getItem("token");
@@ -75,7 +78,7 @@ export default function UserInfo() {
           />
           <Flex flexDirection={"column"} alignItems="center">
             <Text fontSize={20} fontWeight={"bold"}>
-              Lucas Angelino
+              {user_name}
             </Text>
             <Text fontSize={15}>Software Developer</Text>
           </Flex>
@@ -96,14 +99,15 @@ export default function UserInfo() {
               500+
             </Text>
           </HStack>
-
-          <HStack justifyContent="space-between" w="full">
-            <Button onClick={onOpen}>
-              <Text fontSize={"xs"} color="blue.500">
-                Agregar Intereses
-              </Text>
-            </Button>
-          </HStack>
+          {!is_empresa ? null : (
+            <HStack justifyContent="space-between" w="full">
+              <Button onClick={onOpen}>
+                <Text fontSize={"xs"} color="blue.500">
+                  Agregar Intereses
+                </Text>
+              </Button>
+            </HStack>
+          )}
         </VStack>
       </Box>
       <Modal

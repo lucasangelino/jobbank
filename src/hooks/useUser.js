@@ -2,22 +2,33 @@ import { useState } from "react";
 
 export function useUser() {
   const [user, setUser] = useState(() => localStorage.getItem("token"));
+  const [user_id, setUserID] = useState(() => localStorage.getItem("user_id"));
+  const [user_name, setUserName] = useState(() =>
+    localStorage.getItem("user_name")
+  );
+  const [is_empresa, setIsEmpresa] = useState(() =>
+    localStorage.getItem("is_empresa")
+  );
 
-  const login = (token) => {
-    console.log("login");
-    localStorage.setItem("token", token);
+  const login = (data) => {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user_id", data.user_id);
+    localStorage.setItem("user_name", data.user_name);
+    localStorage.setItem("is_empresa", data.is_empresa);
+    localStorage.setItem("intereses", data.intereses);
     setUser(true);
   };
 
   const logout = () => {
-    console.log("logout");
     localStorage.clear();
     setUser(false);
   };
 
   return {
     user,
-    is_company: true,
+    user_id,
+    user_name,
+    is_empresa,
     login,
     logout,
   };

@@ -7,11 +7,12 @@ import {
   Stack,
   Divider,
   Flex,
+  Badge,
 } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-export default function JobCard() {
+export default function JobCard({ job }) {
   return (
     <Box
       w={"full"}
@@ -29,22 +30,22 @@ export default function JobCard() {
         alignContent="space-between"
         divider={<Divider borderColor="gray.300" />}
       >
-        <EmployerDescription />
-        <JobDescription />
-        <ActionButtons />
+        <EmployerDescription title={job.company_title} time={job.date} />
+        <JobDescription description={job.description} JobReq={job.requisitos} />
+        <ActionButtons isOpen={job.is_open} />
       </VStack>
     </Box>
   );
 }
 
-const EmployerDescription = () => {
+const EmployerDescription = ({ title, time }) => {
   return (
     <Stack spacing={0} w="full" direction="row" justifyContent="space-between">
       <Flex>
         <CompanyImage />
         <Box ml="3">
-          <CompanyName />
-          <JobPostedTime />
+          <CompanyName title={title} />
+          <JobPostedTime time={time} />
         </Box>
       </Flex>
       <HamburgerIcon w={4} h={4} />
@@ -52,10 +53,10 @@ const EmployerDescription = () => {
   );
 };
 
-const CompanyName = () => {
+const CompanyName = ({ title }) => {
   return (
     <Heading as="h2" size="md">
-      Unilever
+      {title}
     </Heading>
   );
 };
@@ -74,54 +75,54 @@ const CompanyImage = () => {
   );
 };
 
-const JobPostedTime = () => {
-  return <Text fontSize="xs">hace 5 horas</Text>;
+const JobPostedTime = ({ time }) => {
+  return <Text fontSize="xs">{time}</Text>;
 };
 
-const JobDescription = () => {
+const JobDescription = ({ description, JobReq }) => {
   return (
     <Box my={5}>
-      <JobIntroduction />
-      <JobRequirements />
+      <JobIntroduction intro={description} />
+      <JobRequirements req={JobReq} />
     </Box>
   );
 };
 
-const JobIntroduction = () => {
+const JobIntroduction = ({ intro }) => {
   return (
-    <Text fontSize="md" mb={5}>
-      At Unilever, we are pioneering the Future of Work. Our Flex Experiences
-      platform is enabling employees to work on projects across our entire
-      organisation, that are aligned with their purpose and help them develop
-      new skills and experiences.
+    <Text fontSize="md" mb={5} textAlign={"left"}>
+      {intro}
     </Text>
   );
 };
 
-const JobRequirements = () => {
+const JobRequirements = ({ req }) => {
   return (
     <>
-      <Heading as="h3" size="md">
+      <Heading as="h3" size="md" mb={4}>
         Requisitos:
       </Heading>
-      <Text fontSize="md" fontWeight={"light"}>
-        React
-      </Text>
-      <Text fontSize="md" fontWeight={"light"}>
-        Node
-      </Text>
-      <Text fontSize="md" fontWeight={"light"}>
-        Ingles avanzado (excluyente)
-      </Text>
+      {req.map((item) => {
+        return (
+          <Badge variant="solid" colorScheme="green" p={1} mx={1}>
+            {item}
+          </Badge>
+        );
+      })}
     </>
   );
 };
 
-const ActionButtons = () => {
+const ActionButtons = ({ isOpen }) => {
   return (
     <Stack mt={2} w="full" direction="row" justifyContent="flex-end">
-      <Button colorScheme="blue" size="md" variant="outline">
-        Postularse
+      <Button
+        colorScheme={isOpen ? "blue" : "red"}
+        size="md"
+        variant={isOpen ? "outline" : ""}
+        isDisabled={!isOpen}
+      >
+        {isOpen ? "Postularse" : "Cerrado"}
       </Button>
     </Stack>
   );

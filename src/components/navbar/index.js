@@ -68,13 +68,6 @@ export default function Navbar() {
         <Container maxW="full" bg={"white"}>
           <Box px={4}>
             <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-              {/* <IconButton
-                size={"md"}
-                icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                aria-label={"Open Menu"}
-                display={{ md: "none" }}
-                onClick={isOpen ? onClose : onOpen}
-              /> */}
               <HStack spacing={8} alignItems={"center"}>
                 <HStack
                   as={"nav"}
@@ -84,10 +77,10 @@ export default function Navbar() {
                   <Link key={1} to={"/"}>
                     {"Home"}
                   </Link>
-                  <Link key={2} to={"/"}>
+                  <Link key={2} to={"/postulaciones"}>
                     {"Postulaciones"}
                   </Link>
-                  <Link key={3} to={"/perfil"}>
+                  <Link key={3} to={"/profile"}>
                     {"Perfil"}
                   </Link>
                   {is_company && (
@@ -115,9 +108,6 @@ export default function Navbar() {
                     />
                   </MenuButton>
                   <MenuList>
-                    <MenuItem>Ver perfil</MenuItem>
-                    <MenuItem>Ver postulaciones</MenuItem>
-                    <MenuDivider />
                     <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
                   </MenuList>
                 </Menu>

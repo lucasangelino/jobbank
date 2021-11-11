@@ -5,6 +5,7 @@ import JobOffers from "../components/jobwall";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import Profile from "../components/profile";
+import MisPostulaciones from "../components/postulaciones";
 
 const routes = [
   {
@@ -35,6 +36,12 @@ const routes = [
     path: "/profile",
     exact: true,
     main: () => <Profile />,
+    browserTitle: "Mis Publicaciones",
+  },
+  {
+    path: "/postulaciones",
+    exact: true,
+    main: () => <MisPostulaciones />,
     browserTitle: "Mis Publicaciones",
   },
 ];

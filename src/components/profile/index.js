@@ -10,9 +10,9 @@ export default function Profile() {
   const { is_empresa, id } = useUser();
 
   React.useEffect(() => {
-    function getPrefil() {
-      const token = localStorage.getItem("token");
-      const res = fetch(
+    async function getPrefil() {
+      const token = await localStorage.getItem("token");
+      const res = await fetch(
         `http://localhost:8080/${is_empresa ? "empresa" : "postulante"}/${id}`,
         {
           method: "GET",
@@ -22,7 +22,7 @@ export default function Profile() {
           },
         }
       );
-      const data = res.json();
+      const data = await res.json();
       setProfile(data);
     }
     getPrefil();
@@ -34,7 +34,7 @@ export default function Profile() {
     <>
       <Navbar />
       <Layout>
-        <Text>Datos empresa</Text>
+        <Text mt={10}>Mi Perfil</Text>
       </Layout>
     </>
   );

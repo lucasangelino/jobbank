@@ -32,7 +32,11 @@ export default function JobCard({ job }) {
       >
         <EmployerDescription title={job.company_title} time={job.date} />
         <JobDescription description={job.description} JobReq={job.requisitos} />
-        <ActionButtons isOpen={job.is_open} />
+        {job.postulado ? (
+          <Text>Postulado</Text>
+        ) : (
+          <ActionButtons isOpen={job.is_open} />
+        )}
       </VStack>
     </Box>
   );

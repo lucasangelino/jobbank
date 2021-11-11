@@ -21,7 +21,7 @@ export default function JobOffers() {
       const data = await res.json();
       setPublicaciones(data);
     }
-    getPublicaciones();
+    // getPublicaciones();
   }, []);
 
   return (

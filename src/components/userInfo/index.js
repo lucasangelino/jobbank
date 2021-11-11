@@ -1,7 +1,11 @@
-import { Box, Flex, Avatar, Text, HStack } from "@chakra-ui/react";
+import { Box, Flex, Avatar, Text, HStack, Button } from "@chakra-ui/react";
 import { VStack, Divider } from "@chakra-ui/layout";
 
 export default function UserInfo() {
+  const addInteres = () => {
+    console.log("addInteres");
+  };
+
   return (
     <Box
       w={"full"}
@@ -45,6 +49,14 @@ export default function UserInfo() {
           <Text fontSize={"xs"} color="brand.800">
             500+
           </Text>
+        </HStack>
+
+        <HStack justifyContent="space-between" w="full">
+          <Button onClick={addInteres}>
+            <Text fontSize={"xs"} color="blue.500">
+              Agregar Intereses
+            </Text>
+          </Button>
         </HStack>
       </VStack>
     </Box>

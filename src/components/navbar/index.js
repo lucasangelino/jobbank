@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Box,
   Flex,
@@ -18,7 +19,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  Lorem,
+  Input,
   ModalFooter,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -27,12 +28,38 @@ import { useUser } from "../../hooks/useUser";
 
 export default function Navbar() {
   const { logout, is_company } = useUser();
+  const [postulacion, setPostulacion] = React.useState({
+    titulo: "",
+    req1: "",
+    req2: "",
+  });
 
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleLogout = () => {
     logout();
+  };
+
+  const handleChange = (e) => {
+    setPostulacion({
+      ...postulacion,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleAgregar = async () => {
+    const token = localStorage.getItem("token");
+    const res = fetch("http://localhost:8080/publicacion/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(postulacion),
+    });
+    const data = await res.json();
+    return data;
   };
 
   return (
@@ -112,13 +139,50 @@ export default function Navbar() {
         <ModalContent>
           <ModalHeader>Agregar Publicacion</ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
+          <ModalBody>
+            <Input
+              name="name"
+              mb={4}
+              placeholder="Titulo"
+              bg={"gray.100"}
+              border={0}
+              color={"gray.500"}
+              _placeholder={{
+                color: "gray.500",
+              }}
+              onChange={handleChange}
+            />
+            <Input
+              name="req1"
+              mb={4}
+              placeholder="Requisito"
+              bg={"gray.100"}
+              border={0}
+              color={"gray.500"}
+              _placeholder={{
+                color: "gray.500",
+              }}
+              onChange={handleChange}
+            />
+            <Input
+              name="req2"
+              mb={4}
+              placeholder="Requisito"
+              bg={"gray.100"}
+              border={0}
+              color={"gray.500"}
+              _placeholder={{
+                color: "gray.500",
+              }}
+              onChange={handleChange}
+            />
+          </ModalBody>
           <ModalFooter>
             <Button
               colorScheme="blue"
               variant="outline"
               mr={3}
-              onClick={onClose}
+              onClick={handleAgregar}
             >
               Agregrar
             </Button>

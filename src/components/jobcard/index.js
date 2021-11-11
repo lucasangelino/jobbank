@@ -1,4 +1,17 @@
-import { Box, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  useDisclosure,
+  ModalOverlay,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  Input,
+  ModalFooter,
+  useToast,
+} from "@chakra-ui/react";
 import {
   VStack,
   Heading,
@@ -118,16 +131,76 @@ const JobRequirements = ({ req }) => {
 };
 
 const ActionButtons = ({ isOpen }) => {
+  const { isOpen: esAbierto, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+
+  const handlePostuladoClick = () => {
+    console.log("Postulado");
+  };
+  const handleChange = (e) => {
+    console.log(e.target.value);
+  };
+  const handleAgregar = () => {
+    onClose();
+    toast({
+      title: "Postulado exitosamente",
+      description: "",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+  };
+
   return (
-    <Stack mt={2} w="full" direction="row" justifyContent="flex-end">
-      <Button
-        colorScheme={isOpen ? "blue" : "red"}
-        size="md"
-        variant={isOpen ? "outline" : ""}
-        isDisabled={!isOpen}
+    <>
+      <Stack mt={2} w="full" direction="row" justifyContent="flex-end">
+        <Button
+          colorScheme={isOpen ? "blue" : "red"}
+          size="md"
+          variant={isOpen ? "outline" : ""}
+          isDisabled={!isOpen}
+          onClick={onOpen}
+        >
+          {isOpen ? "Postularse" : "Cerrado"}
+        </Button>
+      </Stack>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={esAbierto}
+        motionPreset="slideInBottom"
       >
-        {isOpen ? "Postularse" : "Cerrado"}
-      </Button>
-    </Stack>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Ingresa Remuneracion Pretendida</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Input
+              name="remuneracion"
+              mb={4}
+              placeholder="Escribe remuneracion en pesos"
+              bg={"gray.100"}
+              border={0}
+              color={"gray.500"}
+              _placeholder={{
+                color: "gray.500",
+              }}
+              onChange={handleChange}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              variant="outline"
+              mr={3}
+              onClick={handleAgregar}
+            >
+              Enviar
+            </Button>
+            <Button variant="ghost">Cancelar</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };

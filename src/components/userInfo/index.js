@@ -1,64 +1,148 @@
-import { Box, Flex, Avatar, Text, HStack, Button } from "@chakra-ui/react";
+import * as React from "react";
+
+import {
+  Box,
+  Flex,
+  Avatar,
+  Text,
+  HStack,
+  Button,
+  Modal,
+  useDisclosure,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  Input,
+  ModalFooter,
+} from "@chakra-ui/react";
 import { VStack, Divider } from "@chakra-ui/layout";
 
 export default function UserInfo() {
-  const addInteres = () => {
-    console.log("addInteres");
+  const [intereses, setIntereses] = React.useState({
+    interes1: "",
+  });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const addInteres = async () => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      "http://localhost:8080/postulante/interes/add",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(intereses),
+      }
+    );
+    const parsedResponse = await response.json();
+    console.log(parsedResponse);
+  };
+
+  const handleChange = (e) => {
+    setIntereses({ ...intereses, [e.target.name]: e.target.value });
+  };
+
+  const handleAgregar = () => {
+    addInteres();
+    onClose();
   };
 
   return (
-    <Box
-      w={"full"}
-      rounded={"lg"}
-      p={1}
-      m={5}
-      bg={"white"}
-      border="2px"
-      borderColor="#E0DFDC"
-    >
-      <VStack
-        w="full"
-        h="full"
-        p={2}
-        alignContent="space-between"
-        divider={<Divider borderColor="gray.100" />}
+    <>
+      <Box
+        w={"full"}
+        rounded={"lg"}
+        p={1}
+        m={5}
+        bg={"white"}
+        border="2px"
+        borderColor="#E0DFDC"
       >
-        <Avatar
-          size={"lg"}
-          src={"https://randomuser.me/api/portraits/thumb/men/75.jpg"}
-        />
-        <Flex flexDirection={"column"} alignItems="center">
-          <Text fontSize={20} fontWeight={"bold"}>
-            Lucas Angelino
-          </Text>
-          <Text fontSize={15}>Software Developer</Text>
-        </Flex>
-        <HStack justifyContent="space-between" w="full">
-          <Text fontSize={"xs"} color="gray.500">
-            Quien ha visto tu perfil?
-          </Text>
-          <Text fontSize={"xs"} color="brand.800">
-            90
-          </Text>
-        </HStack>
-
-        <HStack justifyContent="space-between" w="full">
-          <Text fontSize={"xs"} color="gray.500">
-            Amplia tu red de contactos
-          </Text>
-          <Text fontSize={"xs"} color="brand.800">
-            500+
-          </Text>
-        </HStack>
-
-        <HStack justifyContent="space-between" w="full">
-          <Button onClick={addInteres}>
-            <Text fontSize={"xs"} color="blue.500">
-              Agregar Intereses
+        <VStack
+          w="full"
+          h="full"
+          p={2}
+          alignContent="space-between"
+          divider={<Divider borderColor="gray.100" />}
+        >
+          <Avatar
+            size={"lg"}
+            src={"https://randomuser.me/api/portraits/thumb/men/75.jpg"}
+          />
+          <Flex flexDirection={"column"} alignItems="center">
+            <Text fontSize={20} fontWeight={"bold"}>
+              Lucas Angelino
             </Text>
-          </Button>
-        </HStack>
-      </VStack>
-    </Box>
+            <Text fontSize={15}>Software Developer</Text>
+          </Flex>
+          <HStack justifyContent="space-between" w="full">
+            <Text fontSize={"xs"} color="gray.500">
+              Quien ha visto tu perfil?
+            </Text>
+            <Text fontSize={"xs"} color="brand.800">
+              90
+            </Text>
+          </HStack>
+
+          <HStack justifyContent="space-between" w="full">
+            <Text fontSize={"xs"} color="gray.500">
+              Amplia tu red de contactos
+            </Text>
+            <Text fontSize={"xs"} color="brand.800">
+              500+
+            </Text>
+          </HStack>
+
+          <HStack justifyContent="space-between" w="full">
+            <Button onClick={onOpen}>
+              <Text fontSize={"xs"} color="blue.500">
+                Agregar Intereses
+              </Text>
+            </Button>
+          </HStack>
+        </VStack>
+      </Box>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Agregar Interes</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Input
+              name="interes1"
+              mb={4}
+              placeholder="Escribe un Interes"
+              bg={"gray.100"}
+              border={0}
+              color={"gray.500"}
+              _placeholder={{
+                color: "gray.500",
+              }}
+              onChange={handleChange}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              variant="outline"
+              mr={3}
+              onClick={handleAgregar}
+            >
+              Agregrar
+            </Button>
+            <Button variant="ghost">Cancelar</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
